@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,11 +23,13 @@ public class ElenaNov686Test {
 
         driver.get(BASE_URL);
         Thread.sleep(5000);
+
         WebElement findLinkGuide = driver.findElement(By
                 .xpath("//div[@id='desktop-menu']//a[@href='/guide']"));
         //body/nav//a[text()='Guide']
         findLinkGuide.click();
         Thread.sleep(5000);
+
         String actualResult1 = driver.getCurrentUrl();
         String actualResult2 = driver.getTitle();
 
@@ -45,17 +48,19 @@ public class ElenaNov686Test {
     3.  Подтвердить, что температура для города показана в Фарингейтах
      */
     @Test
-    public void testGuideImperialFarenheitVerify() throws InterruptedException {
+    public void testTemperatureImperialFahrenheitVerify() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "/Users/elena/Driver/chromedriver");
         WebDriver driver = new ChromeDriver();
 
         driver.get(BASE_URL);
         Thread.sleep(5000);
+
         WebElement imperialF = driver.findElement(By
                 .xpath("//div[@class='switch-container']//div[text()='Imperial: °F, mph']"));
 
         imperialF.click();
         Thread.sleep(5000);
+
         WebElement temperatureF = driver.findElement(By
                 .xpath("//span[@class='heading']"));
 
@@ -70,11 +75,11 @@ public class ElenaNov686Test {
     }
 
     /*TC_11_03
-1.  Открыть базовую ссылку
-2. Подтвердить, что внизу страницы есть панель с текстом “We use cookies which are essential
-for the site to work. We also use non-essential cookies to help us improve our services.
-Any data collected is anonymised. You can allow all cookies or manage them individually.”
-3. Подтвердить, что на панели внизу страницы есть 2 кнопки “Allow all” и “Manage cookies”*/
+    1.  Открыть базовую ссылку
+    2. Подтвердить, что внизу страницы есть панель с текстом “We use cookies which are essential
+    for the site to work. We also use non-essential cookies to help us improve our services.
+    Any data collected is anonymised. You can allow all cookies or manage them individually.”
+    3. Подтвердить, что на панели внизу страницы есть 2 кнопки “Allow all” и “Manage cookies”*/
     @Test
     public void testVerifyCookiesTextAndTwoButtons() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "/Users/elena/Driver/chromedriver");
@@ -87,6 +92,7 @@ Any data collected is anonymised. You can allow all cookies or manage them indiv
                 .xpath("//p[@class='stick-footer-panel__description']"));
         String actualResult1 = cookiesText.getText();
         String expectedResult1 = "We use cookies which are essential for the site to work. We also use non-essential cookies to help us improve our services. Any data collected is anonymised. You can allow all cookies or manage them individually.";
+
         WebElement allowAll = driver.findElement(By.xpath("//button[text()='Allow all']"));
         Boolean actualResult2 = allowAll.isDisplayed();
 
@@ -102,10 +108,10 @@ Any data collected is anonymised. You can allow all cookies or manage them indiv
     }
 
     /*TC_11_04
-1.  Открыть базовую ссылку
-2.  Подтвердить, что в меню Support есть 3 подменю с названиями “FAQ”, “How to start”
-и “Ask a question”
-*/
+    1.  Открыть базовую ссылку
+    2.  Подтвердить, что в меню Support есть 3 подменю с названиями “FAQ”, “How to start”
+    и “Ask a question”*/
+
     @Test
     public void testVerifyInMenuSupportSubmenu() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "/Users/elena/Driver/chromedriver");
@@ -131,7 +137,6 @@ Any data collected is anonymised. You can allow all cookies or manage them indiv
         Assert.assertTrue(menuSupport.isDisplayed());
 
     }
-//
     /* TC_11_05
     1. Открыть базовую ссылку
     2. Нажать пункт меню Support → Ask a question
@@ -156,6 +161,7 @@ Any data collected is anonymised. You can allow all cookies or manage them indiv
         WebElement menuSupport = driver.findElement(By.xpath("//div[@id='support-dropdown']"));
         menuSupport.click();
         Thread.sleep(500);
+
         WebElement dropDownAskQuestion = driver.findElement(By
                 .xpath("//ul[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']"));
         dropDownAskQuestion.click();
@@ -173,14 +179,17 @@ Any data collected is anonymised. You can allow all cookies or manage them indiv
                 xpath("//input[@id='question_form_email']"));
         emailField.click();
         emailField.sendKeys(eMail);
+
         WebElement subjectSelectField = driver.findElement(By
                 .xpath("//select[@id='question_form_subject']"));
         subjectSelectField.click();
         Thread.sleep(3000);
+
         WebElement subjectSelectOptions = driver.findElement(By
                 .xpath("//select[@id='question_form_subject']//option[@value='Tech Issue']"));
         subjectSelectOptions.click();
         Thread.sleep(3000);
+
         WebElement messageTextArea = driver.findElement(By
                 .xpath("//textarea[@id='question_form_message']"));
         messageTextArea.sendKeys(message);
@@ -198,15 +207,15 @@ Any data collected is anonymised. You can allow all cookies or manage them indiv
         driver.quit();
     }
 
-    //    TC_11_06
-//1.  Открыть базовую ссылку
-//2.  Нажать пункт меню Support → Ask a question
-//3.  Оставить значение по умолчанию в checkbox Are you an OpenWeather user?
-// 4. Оставить пустым поле Email
-//5. Заполнить поля  Subject, Message
-//6. Подтвердить CAPTCHA
-//7. Нажать кнопку Submit
-//8. Подтвердить, что в поле Email пользователю будет показана ошибка “can't be blank”
+    /*    TC_11_06
+    1.  Открыть базовую ссылку
+    2.  Нажать пункт меню Support → Ask a question
+    3.  Оставить значение по умолчанию в checkbox Are you an OpenWeather user?
+    4. Оставить пустым поле Email
+    5. Заполнить поля  Subject, Message
+    6. Подтвердить CAPTCHA
+    7. Нажать кнопку Submit
+    8. Подтвердить, что в поле Email пользователю будет показана ошибка “can't be blank” */
     @Test
     public void testErrorMessage_WhenSubmitSupportWithoutEmail() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "/Users/elena/Driver/chromedriver");
@@ -223,6 +232,7 @@ Any data collected is anonymised. You can allow all cookies or manage them indiv
         WebElement menuSupport = driver.findElement(By.xpath("//div[@id='support-dropdown']"));
         menuSupport.click();
         Thread.sleep(500);
+
         WebElement dropDownAskQuestion = driver.findElement(By
                 .xpath("//ul[@id='support-dropdown-menu']//a[@href='https://home.openweathermap.org/questions']"));
         dropDownAskQuestion.click();
@@ -310,31 +320,63 @@ Any data collected is anonymised. You can allow all cookies or manage them indiv
 
         String[] metricTemperatureText = metricTemperature.getText().split("");
 
-
         Assert.assertEquals(metricTemperatureText[metricTemperatureText.length - 1], expectedResult);
 
         driver.quit();
     }
 
-    //TC_11_08
-    //1.  Открыть базовую ссылку
-    //2.  Нажать на лого компании
-    //3.  Дождаться, когда произойдет перезагрузка сайта, и подтвердить,
-    // что текущая ссылка не изменилась
+    /*TC_11_08
+    1.  Открыть базовую ссылку
+    2.  Нажать на лого компании
+    3.  Дождаться, когда произойдет перезагрузка сайта, и подтвердить,
+     что текущая ссылка не изменилась */
     @Test
     public void testVerifyLogoReloadUrl() throws InterruptedException {
         System.setProperty("webdriver.chrome.driver", "/Users/elena/Driver/chromedriver");
         WebDriver driver = new ChromeDriver();
+        String expectedResult = "Loading";
 
         driver.get(BASE_URL);
         Thread.sleep(5000);
         WebElement logo = driver.findElement(By
                 .xpath("//img[@src='/themes/openweathermap/assets/img/logo_white_cropped.png']"));
 
-        Thread.sleep(15000);
-        String url = driver.getCurrentUrl();
+        WebElement loading = driver.findElement(By.xpath("//div[@aria-label='Loading']"));
 
-        Assert.assertEquals(url, BASE_URL);
+        String actualResult = loading.getAttribute("aria-label");
+
+        Assert.assertEquals(actualResult, expectedResult);
+
+        driver.quit();
+    }
+
+    //TC_11_09
+//1.  Открыть базовую ссылку
+//2.  В строке поиска в навигационной панели набрать “Rome”
+//3.  Нажать клавишу Enter
+//4.  Подтвердить, что вы перешли на страницу в ссылке которой содержатся слова “find” и “Rome”
+//5. Подтвердить, что в строке поиска на новой странице вписано слово “Rome”
+    @Test
+    public void testRomeEnterVerifyUrlContainsRomeAndFind() throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "/Users/elena/Driver/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        String rome = "Rome";
+
+        driver.get(BASE_URL);
+        Thread.sleep(5000);
+
+        WebElement searchLine = driver.findElement(By
+                .xpath("//div[@id='desktop-menu']//input[@placeholder='Weather in your city']"));
+        searchLine.sendKeys(rome);
+        searchLine.sendKeys(Keys.ENTER);
+        Thread.sleep(5000);
+
+        String currentUrl = driver.getCurrentUrl();
+        String actualResult = driver.findElement(By.xpath("//input[@class]")).getAttribute("value");
+
+        Assert.assertEquals(actualResult, rome);
+        Assert.assertTrue(currentUrl.contains("Rome"));
+        Assert.assertTrue(currentUrl.contains("find"));
 
         driver.quit();
     }
